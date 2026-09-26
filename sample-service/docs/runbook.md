@@ -1,6 +1,18 @@
-# Harbor Stay on-call runbook (OUTDATED)
+# Harbor Stay on-call runbook
 
-> **Warning:** This runbook predates the Python monolith. Do not use paths below for code changes.
+## Current system (Python monolith)
+
+The confirmation flow now lives entirely in the Python monolith.
+
+- **Entry point:** `harborstay/billing.py` → `confirm_reservation()`
+- **Idempotency:** callers must pass the `Idempotency-Key` request header; the billing module records each key in its ledger before attempting a charge.
+- **Duplicate charge investigation:** if a duplicate charge is reported, check that `Idempotency-Key` is being persisted in the ledger *before* `charge_card` is called. A missing or late write means a retry can reach `charge_card` a second time.
+
+---
+
+## Legacy billing-worker (LEGACY — pre-migration)
+
+> **Warning:** The steps below describe the old Node.js billing-worker stack. They no longer reflect the running system. Do not use these paths for code changes or incident response.
 
 ## Symptom: duplicate charges on confirm
 

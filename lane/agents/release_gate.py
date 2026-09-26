@@ -43,10 +43,17 @@ class ReleaseGateAgent(AgentApp):
         failed = [k for k, v in gates.items() if v.startswith("fail")]
         decision = "go" if not failed else "no-go"
 
+        summary_lines = [
+            f"{'PASS' if not v.startswith('fail') else 'FAIL'} | {k}: {v}"
+            for k, v in gates.items()
+        ]
+        release_summary = "\n".join(summary_lines)
+
         updates = {
             "release_gates": gates,
             "release_decision": decision,
             "failed_gates": failed,
+            "release_summary": release_summary,
         }
         packet = packet.merge_artifacts(updates)
         if decision == "no-go":

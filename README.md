@@ -60,6 +60,21 @@ python3 -m lane run --trigger alert --repo ./sample-service
 
 Run logs are written to `lane/runs/run-<uuid>.json`.
 
+### Demo commands
+
+Built by **Double Charge Club** with **IBM Bob** assisting development throughout.
+
+```bash
+# Run a support-ticket patch workflow
+python3 -m lane run --trigger ticket
+
+# Run a full alert → patch → release-gate chain
+python3 -m lane run --trigger alert
+
+# Run the Harbor Stay demo directly
+cd sample-service && python3 -m harborstay.demo
+```
+
 ## IBM Bob 2.0
 
 Bob was used in **Agent mode** to build and extend Harbor Stay, the orchestrator, and agent apps (including the **ticket_patch** flow that applies the idempotency billing fix and regression test). Task session summaries are included in the hackathon submission.
