@@ -1,0 +1,59 @@
+{
+  "runId": "69ffc732-baa0-492a-b0d3-f8019197892c",
+  "trigger": "ticket",
+  "startedAt": "2026-09-26T16:47:44.812341+00:00",
+  "steps": [
+    {
+      "app": "ticket_patch",
+      "status": "running",
+      "artifactsKeys": [
+        "billing_patched",
+        "bug_present_before_patch",
+        "demo_exit_code",
+        "demo_output",
+        "fix_summary",
+        "fixture_path",
+        "patch_target",
+        "regression_test_added",
+        "test_exit_code",
+        "test_stderr_tail",
+        "tests_command",
+        "ticket_path"
+      ],
+      "errors": []
+    }
+  ],
+  "finalPacket": {
+    "run_id": "69ffc732-baa0-492a-b0d3-f8019197892c",
+    "trigger": "ticket",
+    "from_app": null,
+    "to_app": "ticket_patch",
+    "repo_path": "/home/hotelogix/Downloads/PROJECT-02/sample-service",
+    "repo_revision": "working-tree",
+    "status": "complete",
+    "artifacts": {
+      "fixture_path": "tickets/SUP-1187.md",
+      "ticket_path": "fixtures/tickets/SUP-1187.md",
+      "patch_target": "harborstay/billing.py",
+      "fix_summary": "Idempotency check before charge_card; regression test for retry",
+      "bug_present_before_patch": false,
+      "billing_patched": false,
+      "regression_test_added": false,
+      "test_exit_code": 0,
+      "tests_command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      "test_stderr_tail": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.000s\n\nOK\n",
+      "demo_exit_code": 0,
+      "demo_output": "reservation: HS-1001\nfirst confirmation: CNF-1001 charges=1\nretry confirmation: CNF-1001 charges=1\nexpected charges after one retry with the same Idempotency-Key: 1"
+    },
+    "errors": [],
+    "retries": {}
+  },
+  "finishedAt": "2026-09-26T16:47:44.915971+00:00"
+}

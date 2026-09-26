@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lane — Double Charge Club</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header>
+    <p class="badge">IBM Bob 2.0 Hackathon</p>
+    <h1>Lane orchestrator</h1>
+    <p class="sub">Five agent apps · one shared Harbor Stay repo · Team Double Charge Club</p>
+    <p class="links">
+      <a href="https://github.com/Ravi-Saxena-kronos/lane-harbor-stay" target="_blank" rel="noopener">GitHub</a>
+    </p>
+  </header>
+
+  <section class="panel">
+    <h2>Try a workflow trigger</h2>
+    <p class="hint">Runs replay captured orchestrator logs from the real project. For full local execution, clone the repo and run <code>python3 -m lane run --trigger …</code>.</p>
+    <div class="buttons" id="triggers"></div>
+    <pre id="output" aria-live="polite">Select a trigger…</pre>
+  </section>
+
+  <section class="panel">
+    <h2>Architecture</h2>
+    <ul>
+      <li><strong>alert</strong> → incident → ticket_patch → release_gate</li>
+      <li><strong>ticket</strong> → ticket_patch</li>
+      <li><strong>release</strong> → release_gate</li>
+      <li><strong>onboard</strong> → onboarding</li>
+      <li><strong>advisory</strong> → advisory</li>
+    </ul>
+  </section>
+
+  <footer>MIT · Harbor Stay sample service · Built with IBM Bob 2.0</footer>
+  <script src="/app.js"></script>
+</body>
+</html>

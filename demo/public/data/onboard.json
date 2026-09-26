@@ -1,0 +1,42 @@
+{
+  "runId": "187f59b6-7b94-4b37-b71f-a5982b69f28c",
+  "trigger": "onboard",
+  "startedAt": "2026-09-26T16:47:45.194991+00:00",
+  "steps": [
+    {
+      "app": "onboarding",
+      "status": "escalated",
+      "artifactsKeys": [
+        "doc_drift",
+        "drift_detail",
+        "module_map"
+      ],
+      "errors": [
+        "onboarding: doc drift \u2014 update runbook before starter task"
+      ]
+    }
+  ],
+  "finalPacket": {
+    "run_id": "187f59b6-7b94-4b37-b71f-a5982b69f28c",
+    "trigger": "onboard",
+    "from_app": null,
+    "to_app": "onboarding",
+    "repo_path": "/home/hotelogix/Downloads/PROJECT-02/sample-service",
+    "repo_revision": "working-tree",
+    "status": "escalated",
+    "artifacts": {
+      "module_map": [
+        "harborstay/api.py",
+        "harborstay/billing.py",
+        "harborstay/inventory.py"
+      ],
+      "doc_drift": true,
+      "drift_detail": "runbook points at billing-worker; code is in harborstay/billing.py"
+    },
+    "errors": [
+      "onboarding: doc drift \u2014 update runbook before starter task"
+    ],
+    "retries": {}
+  },
+  "finishedAt": "2026-09-26T16:47:45.195323+00:00"
+}

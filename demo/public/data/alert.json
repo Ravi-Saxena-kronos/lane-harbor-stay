@@ -1,0 +1,147 @@
+{
+  "runId": "c1d832b1-9b67-4670-9742-093324244281",
+  "trigger": "alert",
+  "startedAt": "2026-09-26T16:47:44.532733+00:00",
+  "steps": [
+    {
+      "app": "incident",
+      "status": "running",
+      "artifactsKeys": [
+        "alert",
+        "customer_status_note",
+        "fixture_path",
+        "recommended_action",
+        "runbook_stale_hint",
+        "suspected_files"
+      ],
+      "errors": []
+    },
+    {
+      "app": "ticket_patch",
+      "status": "running",
+      "artifactsKeys": [
+        "alert",
+        "billing_patched",
+        "bug_present_before_patch",
+        "customer_status_note",
+        "demo_exit_code",
+        "demo_output",
+        "fix_summary",
+        "fixture_path",
+        "patch_target",
+        "recommended_action",
+        "regression_test_added",
+        "runbook_stale_hint",
+        "suspected_files",
+        "test_exit_code",
+        "test_stderr_tail",
+        "tests_command",
+        "ticket_path"
+      ],
+      "errors": []
+    },
+    {
+      "app": "release_gate",
+      "status": "complete",
+      "artifactsKeys": [
+        "alert",
+        "billing_patched",
+        "bug_present_before_patch",
+        "customer_status_note",
+        "demo_exit_code",
+        "demo_output",
+        "failed_gates",
+        "fix_summary",
+        "fixture_path",
+        "patch_target",
+        "recommended_action",
+        "regression_test_added",
+        "release_decision",
+        "release_gates",
+        "release_summary",
+        "runbook_stale_hint",
+        "suspected_files",
+        "test_exit_code",
+        "test_stderr_tail",
+        "tests_command",
+        "ticket_path"
+      ],
+      "errors": [
+        "release_gate: no-go \u2014 gates failed (expected before patch)"
+      ]
+    }
+  ],
+  "finalPacket": {
+    "run_id": "c1d832b1-9b67-4670-9742-093324244281",
+    "trigger": "alert",
+    "from_app": "ticket_patch",
+    "to_app": "release_gate",
+    "repo_path": "/home/hotelogix/Downloads/PROJECT-02/sample-service",
+    "repo_revision": "working-tree",
+    "status": "complete",
+    "artifacts": {
+      "fixture_path": "alerts/ALT-2041.json",
+      "alert": {
+        "alertId": "ALT-2041",
+        "severity": "sev2",
+        "service": "harbor-stay",
+        "summary": "Elevated 5xx on POST /reservations/{id}/confirm",
+        "startedAt": "2026-09-26T02:14:00Z",
+        "metric": "http.server.errors",
+        "value": "4.2%",
+        "threshold": "2%",
+        "recentErrors": [
+          "timeout contacting card gateway after 30s",
+          "client retried confirm with same Idempotency-Key"
+        ],
+        "suspectedEndpoint": "POST /reservations/{reservationId}/confirm",
+        "customerImpact": "Guests report duplicate card charges after booking retry",
+        "links": {
+          "ticket": "fixtures/tickets/SUP-1187.md"
+        }
+      },
+      "suspected_files": [
+        "harborstay/billing.py"
+      ],
+      "recommended_action": "patch_idempotency_before_charge",
+      "customer_status_note": "Guests report duplicate card charges after booking retry",
+      "runbook_stale_hint": true,
+      "ticket_path": "fixtures/tickets/SUP-1187.md",
+      "patch_target": "harborstay/billing.py",
+      "fix_summary": "Idempotency check before charge_card; regression test for retry",
+      "bug_present_before_patch": false,
+      "billing_patched": false,
+      "regression_test_added": false,
+      "test_exit_code": 0,
+      "tests_command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      "test_stderr_tail": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.000s\n\nOK\n",
+      "demo_exit_code": 0,
+      "demo_output": "reservation: HS-1001\nfirst confirmation: CNF-1001 charges=1\nretry confirmation: CNF-1001 charges=1\nexpected charges after one retry with the same Idempotency-Key: 1",
+      "release_gates": {
+        "contract_status_code": "fail_openapi_expects_200_confirm",
+        "contract_charged_field": "fail_missing_chargedCents_in_spec",
+        "migration_guest_email": "fail_api_has_no_guest_email",
+        "unit_tests": "pass"
+      },
+      "release_decision": "no-go",
+      "failed_gates": [
+        "contract_status_code",
+        "contract_charged_field",
+        "migration_guest_email"
+      ],
+      "release_summary": "FAIL | contract_status_code: fail_openapi_expects_200_confirm\nFAIL | contract_charged_field: fail_missing_chargedCents_in_spec\nFAIL | migration_guest_email: fail_api_has_no_guest_email\nPASS | unit_tests: pass"
+    },
+    "errors": [
+      "release_gate: no-go \u2014 gates failed (expected before patch)"
+    ],
+    "retries": {}
+  },
+  "finishedAt": "2026-09-26T16:47:44.713305+00:00"
+}
