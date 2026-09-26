@@ -9,16 +9,28 @@ const TRIGGERS = [
 const out = document.getElementById("output");
 const container = document.getElementById("triggers");
 
+async function loadTrigger(trigger) {
+  const staticUrl = `/data/${trigger}.json`;
+  let res = await fetch(staticUrl);
+  if (res.ok) {
+    return { data: await res.json(), source: staticUrl };
+  }
+  const apiUrl = `/api/run?trigger=${encodeURIComponent(trigger)}`;
+  res = await fetch(apiUrl);
+  const text = await res.text();
+  if (!res.ok) {
+    throw new Error(text || `HTTP ${res.status}`);
+  }
+  return { data: JSON.parse(text), source: apiUrl };
+}
+
 async function run(trigger, btn) {
   document.querySelectorAll("button").forEach((b) => b.classList.remove("active"));
   btn.classList.add("active");
   out.textContent = "Loading…";
   try {
-    const res = await fetch(`/api/run?trigger=${encodeURIComponent(trigger)}`);
-    const text = await res.text();
-    if (!res.ok) throw new Error(text);
-    const data = JSON.parse(text);
-    out.textContent = JSON.stringify(data, null, 2);
+    const { data, source } = await loadTrigger(trigger);
+    out.textContent = `// ${source}\n\n${JSON.stringify(data, null, 2)}`;
   } catch (err) {
     out.textContent = String(err);
   }

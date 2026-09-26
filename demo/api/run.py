@@ -2,8 +2,15 @@ from http.server import BaseHTTPRequestHandler
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
-DATA_DIR = Path(__file__).resolve().parent.parent / "public" / "data"
 ALLOWED = frozenset({"alert", "ticket", "release", "onboard", "advisory"})
+
+
+def _data_dir() -> Path | None:
+    base = Path(__file__).resolve().parent
+    for candidate in (base / "data", base.parent / "public" / "data"):
+        if (candidate / "alert.json").is_file():
+            return candidate
+    return None
 
 
 class handler(BaseHTTPRequestHandler):
@@ -16,7 +23,14 @@ class handler(BaseHTTPRequestHandler):
         if trigger not in ALLOWED:
             self._json(400, {"error": f"invalid trigger; use one of {sorted(ALLOWED)}"})
             return
-        path = DATA_DIR / f"{trigger}.json"
+        data_dir = _data_dir()
+        if data_dir is None:
+            self._json(
+                500,
+                {"error": "demo data not bundled; use /data/{trigger}.json on the static site"},
+            )
+            return
+        path = data_dir / f"{trigger}.json"
         if not path.is_file():
             self._json(404, {"error": f"missing demo data for {trigger}"})
             return

@@ -1,0 +1,49 @@
+{
+  "runId": "422438a3-636c-456e-9a32-1d6d6fe016f0",
+  "trigger": "release",
+  "startedAt": "2026-09-26T16:47:45.014864+00:00",
+  "steps": [
+    {
+      "app": "release_gate",
+      "status": "complete",
+      "artifactsKeys": [
+        "failed_gates",
+        "release_decision",
+        "release_gates",
+        "release_summary"
+      ],
+      "errors": [
+        "release_gate: no-go \u2014 gates failed (expected before patch)"
+      ]
+    }
+  ],
+  "finalPacket": {
+    "run_id": "422438a3-636c-456e-9a32-1d6d6fe016f0",
+    "trigger": "release",
+    "from_app": null,
+    "to_app": "release_gate",
+    "repo_path": "/home/hotelogix/Downloads/PROJECT-02/sample-service",
+    "repo_revision": "working-tree",
+    "status": "complete",
+    "artifacts": {
+      "release_gates": {
+        "contract_status_code": "fail_openapi_expects_200_confirm",
+        "contract_charged_field": "fail_missing_chargedCents_in_spec",
+        "migration_guest_email": "fail_api_has_no_guest_email",
+        "unit_tests": "pass"
+      },
+      "release_decision": "no-go",
+      "failed_gates": [
+        "contract_status_code",
+        "contract_charged_field",
+        "migration_guest_email"
+      ],
+      "release_summary": "FAIL | contract_status_code: fail_openapi_expects_200_confirm\nFAIL | contract_charged_field: fail_missing_chargedCents_in_spec\nFAIL | migration_guest_email: fail_api_has_no_guest_email\nPASS | unit_tests: pass"
+    },
+    "errors": [
+      "release_gate: no-go \u2014 gates failed (expected before patch)"
+    ],
+    "retries": {}
+  },
+  "finishedAt": "2026-09-26T16:47:45.095559+00:00"
+}

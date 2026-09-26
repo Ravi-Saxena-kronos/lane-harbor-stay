@@ -34,9 +34,12 @@ for t in alert ticket release onboard advisory; do
   python3 -m lane run --trigger $t > /tmp/lane-$t.out 2>&1
   LOG=$(grep '^Log:' /tmp/lane-$t.out | awk '{print $2}')
   cp "$LOG" "demo/public/data/${t}.json"
+  cp "$LOG" "demo/api/data/${t}.json"
 done
 cd demo && vercel --prod
 ```
+
+The UI loads **`/data/{trigger}.json`** (static). The same files are copied to **`api/data/`** for `/api/run` on serverless.
 
 ## Full local testing (for developers)
 
