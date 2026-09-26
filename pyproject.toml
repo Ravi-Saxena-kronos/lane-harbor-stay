@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lane-orchestrator"
+version = "0.1.0"
+description = "Lane multi-agent orchestrator (IBM Bob hackathon — Double Charge Club)"
+readme = "lane/README.md"
+requires-python = ">=3.10"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["lane*"]

@@ -41,18 +41,17 @@ def confirm_reservation(store, reservation_id, idempotency_key):
     if reservation["status"] == "cancelled":
         raise Conflict("Reservation is cancelled")
 
-    if reservation["status"] != "confirmed" and not has_room(store, reservation["roomType"]):
-        raise SoldOut(reservation["roomType"])
-
-    # BUG: charge runs before idempotency check — retries double-charge.
-    charge_card(store, reservation)
-
     prior = store.idempotency.get(idempotency_key)
     if prior is not None:
         return prior
 
     if reservation["status"] == "confirmed" and reservation["confirmation"] is not None:
         return reservation["confirmation"]
+
+    if not has_room(store, reservation["roomType"]):
+        raise SoldOut(reservation["roomType"])
+
+    charge_card(store, reservation)
 
     if not reserve(store, reservation["roomType"]):
         raise SoldOut(reservation["roomType"])

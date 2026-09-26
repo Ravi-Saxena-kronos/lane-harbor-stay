@@ -47,6 +47,15 @@ class ReservationTests(unittest.TestCase):
             confirm_reservation(store, reservation["reservationId"], "ari-1")
         self.assertEqual(store.charges, [])
 
+    def test_confirm_retry_same_idempotency_key_single_charge(self):
+        store = Store()
+        reservation = create_hold(store, "Dana Shah", "harbor-queen", 18400, "tok_dana")
+        key = "dana-retry-9f3"
+        first = confirm_reservation(store, reservation["reservationId"], key)
+        second = confirm_reservation(store, reservation["reservationId"], key)
+        self.assertEqual(first["confirmationCode"], second["confirmationCode"])
+        self.assertEqual(len(store.charges), 1)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -4,9 +4,12 @@ Routes five specialist **agent apps** over one shared repo (`sample-service/`). 
 
 ## Run
 
+**Important:** `lane` is not inside `sample-service/`. Run from the **project root** (`PROJECT-02`), or install once with `pip install -e .` from that root.
+
 From project root (`PROJECT-02`):
 
 ```bash
+cd ~/Downloads/PROJECT-02
 python3 -m lane run --trigger alert
 python3 -m lane run --trigger ticket
 python3 -m lane run --trigger release
@@ -16,7 +19,18 @@ python3 -m lane run --trigger advisory
 
 Options:
 
-- `--repo` — path to Harbor Stay (default: `./sample-service`)
+- `--repo` — path to Harbor Stay (default: `./sample-service`). From `sample-service/` you can use:  
+  `cd ~/Downloads/PROJECT-02 && python3 -m lane run --trigger alert --repo ./sample-service`
+
+### Install into your venv (optional)
+
+```bash
+cd ~/Downloads/PROJECT-02
+pip install -e .
+# then from any directory:
+python3 -m lane run --trigger alert --repo ~/Downloads/PROJECT-02/sample-service
+```
+
 - `--fixture` — override input file for the trigger
 - `--log-dir` — write `run-<id>.json` (default: `./lane/runs`)
 
