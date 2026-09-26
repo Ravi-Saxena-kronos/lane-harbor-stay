@@ -1,0 +1,19 @@
+{
+  "alertId": "ALT-2041",
+  "severity": "sev2",
+  "service": "harbor-stay",
+  "summary": "Elevated 5xx on POST /reservations/{id}/confirm",
+  "startedAt": "2026-09-26T02:14:00Z",
+  "metric": "http.server.errors",
+  "value": "4.2%",
+  "threshold": "2%",
+  "recentErrors": [
+    "timeout contacting card gateway after 30s",
+    "client retried confirm with same Idempotency-Key"
+  ],
+  "suspectedEndpoint": "POST /reservations/{reservationId}/confirm",
+  "customerImpact": "Guests report duplicate card charges after booking retry",
+  "links": {
+    "ticket": "fixtures/tickets/SUP-1187.md"
+  }
+}

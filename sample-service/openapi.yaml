@@ -1,0 +1,68 @@
+openapi: 3.0.3
+info:
+  title: Harbor Stay API
+  version: 1.4.0
+  description: Fictional inn reservation service (sample).
+paths:
+  /health:
+    get:
+      summary: Health check
+      responses:
+        "200":
+          description: OK
+  /reservations:
+    post:
+      summary: Create a held reservation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewReservation"
+      responses:
+        "201":
+          description: Created
+  /reservations/{reservationId}/confirm:
+    post:
+      summary: Confirm reservation and charge card
+      parameters:
+        - name: reservationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Confirmed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Confirmation"
+components:
+  schemas:
+    NewReservation:
+      type: object
+      required: [guestName, roomType, amountCents, cardToken]
+      properties:
+        guestName:
+          type: string
+        roomType:
+          type: string
+        amountCents:
+          type: integer
+        cardToken:
+          type: string
+    Confirmation:
+      type: object
+      properties:
+        reservationId:
+          type: string
+        status:
+          type: string
+        confirmationCode:
+          type: string

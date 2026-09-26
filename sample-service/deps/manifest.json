@@ -1,0 +1,7 @@
+{
+  "service": "harbor-stay",
+  "packages": [
+    { "name": "harbor-pdf", "version": "1.2.0", "use": "confirmation email attachments" },
+    { "name": "harbor-metrics", "version": "0.9.4", "use": "request logging" }
+  ]
+}
